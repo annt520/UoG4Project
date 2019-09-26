@@ -29,5 +29,13 @@ namespace Assignment.Models
         {
             return new ApplicationDbContext();
         }
+
+        public System.Data.Entity.DbSet<Assignment.Models.Post> Posts { get; set; }
+
+        public System.Data.Entity.DbSet<Assignment.Models.Category> Categories { get; set; }
+
+        public System.Data.Entity.DbSet<Assignment.Models.Tag> Tags { get; set; }
+
+        public System.Data.Entity.DbSet<Assignment.Models.PostTag> PostTags { get; set; }
     }
 }

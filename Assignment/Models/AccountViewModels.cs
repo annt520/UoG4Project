@@ -103,7 +103,7 @@ namespace Assignment.Models
     }
 
     public class ForgotPasswordViewModel
-    {
+    { 
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]

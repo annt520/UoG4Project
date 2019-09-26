@@ -1,0 +1,59 @@
+﻿@model Assignment.Models.Post
+@using Assignment.Models
+
+@{
+    Layout = "~/Views/Shared/_LayoutPostDetail.cshtml";
+    ApplicationDbContext db = new ApplicationDbContext();
+}
+
+<div id="posts">
+
+        <div class="entry clearfix">
+            <div class="entry-image">
+                <img src="../../Imgs/@Html.DisplayFor(model => model.Image)" alt="">
+            </div>
+            <div class="entry-title">
+                <h2>@Html.DisplayFor(model => model.Title)</h2>
+                <h4> Rating &nbsp; : &nbsp; @Html.DisplayFor(model =>model.Rating)/10 &nbsp; &nbsp; <a href="~/Home/About">(Want to know our rating system?)</a> </h4>
+            </div>
+            <ul class="entry-meta clearfix">
+
+                <li><img src="~/Images/BlogCategory.png" style="width:30px;">&nbsp; @Html.DisplayFor(model => model.Category.CategoryName)</li>
+
+                <li>
+                    <img src="~/Images/BlogTag.png" style="width:27px;">&nbsp;
+                    @foreach (var posttag in Model.PostTags)
+                    {
+                        var tag = db.Tags.Find(posttag.TagId);
+                        <span>@tag.TagName |</span>
+                    }
+                </li>
+
+                <li><img src="~/Images/BlogAdmin.png" style="width:27px;">&nbsp; admin</li>
+
+                <li><img src="~/Images/BlogView.png" style="width:27px;">&nbsp; @Html.DisplayFor(model => model.ViewCount)</li>
+
+
+            </ul>
+            <div class="entry-content">
+                @Html.Raw(Model.Content)
+
+                <br />
+                <hr />
+
+                <center>
+                    <h3>Watch Trailer</h3>
+
+                    <iframe src="https://www.youtube.com/embed/@Model.YoutubeLink" width="640" height="360" frameborder="0" allowfullscreen></iframe>
+                </center>
+            
+                <br />
+
+                @Html.ActionLink("Back", "Index", "Index", new { @class = "btn btn-primary" })
+            </div>
+        </div>
+
+    
+
+
+</div>

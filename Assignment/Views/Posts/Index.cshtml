@@ -1,0 +1,51 @@
+﻿@model IEnumerable<Assignment.Models.Post>
+@using Assignment.Models
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ApplicationDbContext db = new ApplicationDbContext();
+}
+
+<div id="posts">
+
+    @foreach (var item in Model)
+    {
+
+
+
+        <div class="entry clearfix">
+            <div class="entry-image">
+                <a href="~/Posts/Details/@item.ID"><img class="image_fade" src="~/Imgs/@(item.Image)" alt=""></a>
+            </div>
+            <div class="entry-title">
+                <h2>@Html.DisplayFor(modelItem => item.Title)</h2>
+            </div>
+            <ul class="entry-meta clearfix">
+
+                <li><img src="~/Images/BlogCategory.png" style="width:30px;">&nbsp; @Html.DisplayFor(modelItem => item.Category.CategoryName)</li>
+
+                <li>
+                    <img src="~/Images/BlogTag.png" style="width:27px;">&nbsp;
+                    @foreach (var posttag in item.PostTags)
+                    {
+                        var tag = db.Tags.Find(posttag.TagId);
+                        <span>@tag.TagName | </span>
+                    }
+                </li>
+
+                <li><img src="~/Images/BlogAdmin.png" style="width:27px;">&nbsp; admin</li>
+
+            </ul>
+            <div class="entry-content">
+                @Html.DisplayFor(modelItem => item.SubTitle)
+
+                <br />
+                <br />
+                @Html.ActionLink("Read more", "Details", new { id = item.ID })
+            </div>
+        </div>
+
+    }
+
+
+</div>
